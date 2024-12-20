@@ -1,0 +1,32 @@
+@api=http://localhost:3000
+@auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMzkyNzY3Nn0.HESCPooDt53fxPuVnUx-kQPVhGT6eH7d0WmxddCk7vY
+
+### Approve Charity
+PATCH  {{api}}/admin/approve/1
+Authorization: {{auth}}
+
+### Reject Charity
+PATCH {{api}}/admin/reject/2
+Authorization: {{auth}}
+
+### Delete Charity
+DELETE {{api}}/admin/delete_charity/2
+Authorization: {{auth}}
+
+### delete user
+DELETE {{api}}/admin/delete_user/5
+Authorization: {{auth}}
+
+### make Admin
+PATCH {{api}}/admin/makeAdmin/4
+Authorization: {{auth}}
+
+### create category
+POST {{api}}/admin/create_category
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "Student"
+}
+

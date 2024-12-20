@@ -43,7 +43,7 @@ router.post('/login',async(req,res)=>{
                     throw new Error("something went wrong");
                 }
                 if(result==true) {
-                    return res.json({token: webtoken(user[0].id)});
+                    return res.json({message: "Login successfully", token: webtoken(user[0].id)});
                 }
                 else{
                     res.status(401).json({error: "User not authorized"});

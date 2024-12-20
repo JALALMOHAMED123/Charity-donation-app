@@ -1,0 +1,28 @@
+@api=http://localhost:3000
+@auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTczNDY5MzkyNX0.aknoqXtYGbXdJMAJnoc6OebtWLB9v4nuPqBJauaD6Hk
+###Add three hash tag for segregate send request
+###order donation
+GET {{api}}/donation/5
+Authorization: {{auth}}
+
+
+###GET users list 
+POST {{api}}/updateStatus
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "payment_id": "pay_12345",
+    "order_id": "order_PZQPdddKO00MXO",
+    "amount": 1000
+}
+
+### donation history
+GET {{api}}/donationHistory
+Authorization: {{auth}}
+
+### download donation receipt
+GET {{api}}/downloadReceipt/1
+Authorization: {{auth}}
+
+

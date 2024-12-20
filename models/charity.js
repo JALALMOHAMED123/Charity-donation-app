@@ -22,6 +22,10 @@ const Charity=sequelize.define('Charity',{
         type: DataType.STRING,
         allowNull: false
     },
+    category: {
+        type: DataType.STRING,
+        allowNull: false
+    },
     approval:{
         type: DataType.BOOLEAN,
         defaultValue: false

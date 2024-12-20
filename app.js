@@ -6,9 +6,10 @@ require('dotenv').config();
 const sequelize= require('./util/db');
 const User=require('./models/user');
 const Charity=require('./models/charity');
-const Category=require('./models/category');
-const Charity_Category=require('./models/charity_category');
-const Payment=require('./models/payment');
+const Donation=require('./models/donation');
+const { router, sendCharityNotification } = require('./routes/charity');
+const Charity_Update=require('./models/charity_update');
+const Impact_report=require('./models/impact_report');
 const cron = require('node-cron');
 
 const app = express();
@@ -19,30 +20,34 @@ app.use(morgan('tiny'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
 const userRoutes=require('./routes/users');
-const charityRoutes=require('./routes/charity');
-const adminRoutes=require('./routes/charity');
-
+const donationRoutes=require('./routes/donation');
+const adminRoutes=require('./routes/admin');
 
 app.use('/user',userRoutes);
-app.use('/charity',charityRoutes);
-app.use('/charity',charityRoutes);
+app.use('/charity',router);
+app.use(donationRoutes);
+app.use('/admin',adminRoutes);
 
-Charity.belongsToMany(Category, { through: Charity_Category })
-Category.belongsToMany(Charity, { through: Charity_Category })
+User.hasMany(Donation);
+Donation.belongsTo(User);
 
-User.hasMany(Payment);
-Payment.belongsTo(User);
+Charity.hasMany(Donation);
+Donation.belongsTo(Charity);
 
-cron.schedule('0 9 * * *', async () => {
-    const donors = await getDonorsWithPendingDonations(); 
-    for (const donor of donors) {
-        await sendEmail(
-            donor.email,
-            'Reminder: Complete Your Donation',
-            `<p>Dear ${donor.name},</p><p>Please complete your donation.</p>`
-        );
+Charity.hasMany(Charity_Update);
+Charity_Update.belongsTo(Charity);
+
+Charity.hasMany(Impact_report);
+Impact_report.belongsTo(Charity);
+
+cron.schedule('29 22 * * *', async () => {
+    console.log("Cron job is running...");
+    try {
+        await sendCharityNotification(Charity_Update, 'updates');
+        await sendCharityNotification(Impact_report, 'impact report');
+    } catch (error) {
+        console.error("Error during cron job:", error.message);
     }
 });
 
@@ -56,3 +61,5 @@ sequelize
         .catch((err)=>{
             console.log(err.message);
         });
+
+module.exports = { User, Charity, Donation };

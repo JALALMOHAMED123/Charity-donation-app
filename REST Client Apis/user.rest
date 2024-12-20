@@ -1,0 +1,41 @@
+@api=http://localhost:3000
+@auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMzkyNzY3Nn0.HESCPooDt53fxPuVnUx-kQPVhGT6eH7d0WmxddCk7vY
+###Add three hash tag for segregate send request
+
+###user signup
+POST {{api}}/user/signup
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "Pandya",
+    "email": "pandya@gmail.com",
+    "password": "r"
+}
+
+
+###user login
+POST {{api}}/user/login
+Content-Type: application/json
+
+{
+    "email": "q@gmail.com",
+    "password": "q"
+}
+
+### update user profile
+POST {{api}}/user/update/4
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "Virat kohli"
+}
+
+###Get user
+GET {{api}}/user/4
+Authorization: {{auth}}
+
+###GET users list 
+GET {{api}}/user/
+Authorization: {{auth}}

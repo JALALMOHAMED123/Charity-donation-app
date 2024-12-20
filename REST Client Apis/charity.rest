@@ -1,0 +1,81 @@
+@api=http://localhost:3000
+@auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMzkyNzY3Nn0.HESCPooDt53fxPuVnUx-kQPVhGT6eH7d0WmxddCk7vY
+###Add three hash tag for segregate send request
+
+###get charities
+GET {{api}}/charity
+Authorization: {{auth}}
+
+###get charity
+GET {{api}}/charity/1
+Authorization: {{auth}}
+
+### create charity
+POST {{api}}/charity/create
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "Dogs Home",
+    "mission": "Our mission is to give home for old persons and age should be more than 50",
+    "projects": "our homes implemented in madurai, chennai, coimbatore and next we are going to implement in trichy",
+    "goals": "our goal is to accomodate more than 100 peoples",
+    "location" : "Hyderabad",
+    "category": "dogs"
+}
+
+### search charity
+POST {{api}}/charity/search
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "searchInput": "",
+    "location": "hy",
+    "category": "dogs"
+}
+
+###update charity
+POST {{api}}/charity/update/7
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "Students Education"
+}
+
+###confirmation mail
+POST {{api}}/charity/confirmationMail
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "email": "jalalmohamed2702@gmail.com",
+    "amount": 2428
+}
+
+### Updates mail
+POST {{api}}/charity/updatesMail
+Authorization: {{auth}}
+
+### Impact report mail
+POST {{api}}/charity/impact_reportMail
+Authorization: {{auth}}
+
+### adding update
+POST {{api}}/charity/charity_update/5
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "We are going to donate food for mother's home"
+}
+
+### adding impact report
+POST {{api}}/charity/impact_report/1
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+    "name": "Your january month donation helped to so many grandpa's"
+}

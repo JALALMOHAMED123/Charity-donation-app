@@ -1,7 +1,7 @@
 const Datatype=require('sequelize');
 const sequelize=require('../util/db');
 
-const Payment=sequelize.define('Payment', {
+const Donation=sequelize.define('Donation', {
     id: {
         type: Datatype.INTEGER,
         autoIncrement: true,
@@ -14,4 +14,4 @@ const Payment=sequelize.define('Payment', {
     amount: Datatype.INTEGER
 })
 
-module.exports=Payment;
+module.exports=Donation;
